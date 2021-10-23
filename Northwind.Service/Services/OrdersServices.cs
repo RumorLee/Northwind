@@ -21,5 +21,11 @@ namespace Northwind.ServicesLayer.Services
         {
             return await _ordersRepository.ListAsync();
         }
+
+        public async Task<Orders> FindAsync(int orderID)
+        {
+            return await _ordersRepository.FindAsync(orderID);
+        }
+
     }
 }

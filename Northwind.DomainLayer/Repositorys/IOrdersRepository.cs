@@ -9,5 +9,6 @@ namespace Northwind.DomainLayer.Repositorys
     public interface IOrdersRepository
     {
         Task<IEnumerable<Orders>> ListAsync();
+        Task<Orders> FindAsync(int orderID);
     }
 }

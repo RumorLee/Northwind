@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Northwind.DataLayer.Resources;
 using Northwind.DomainLayer.Models;
 using Northwind.DomainLayer.Services;
@@ -18,19 +19,30 @@ namespace Northwind.ServicesLayer.Controller
     {
         private readonly IOrdersServices _ordersServices;
         private readonly IMapper _mapper;
+        private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(IOrdersServices ordersServices, IMapper mapper)
+        public OrdersController(IOrdersServices ordersServices, IMapper mapper, ILogger<OrdersController> logger)
         {
             _ordersServices = ordersServices;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // GET: api/Orders
+        // GET: Orders
         [HttpGet]
         public async Task<IEnumerable<OrdersResources>> GetOrdersAsync()
         {
             var orders = await _ordersServices.ListAsync();
             var resources = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrdersResources>>(orders);
+
+            return resources;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<OrdersResources> GetOrdersByIDAsync(int id)
+        {
+            var orders = await _ordersServices.FindAsync(id);
+            var resources = _mapper.Map<Orders, OrdersResources>(orders);
 
             return resources;
         }

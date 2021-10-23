@@ -16,6 +16,13 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
         {
         }
 
+        public async Task<Orders> FindAsync(int orderID)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderDetails)
+                .FirstOrDefaultAsync(o => o.OrderId == orderID);
+        }
+
         public async Task<IEnumerable<Orders>> ListAsync()
         {
             return await _context.Orders.ToListAsync();
