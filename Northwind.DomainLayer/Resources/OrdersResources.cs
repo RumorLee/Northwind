@@ -24,5 +24,7 @@ namespace Northwind.DomainLayer.Resources
         public string CustomerName { get; set; }
         public string EmployeeName { get; set; }
 
+        public List<OrderDetailResources> OrderDetails { get; set; }
+
     }
 }

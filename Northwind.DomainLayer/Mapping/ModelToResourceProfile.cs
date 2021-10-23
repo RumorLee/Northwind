@@ -11,7 +11,12 @@ namespace Northwind.DomainLayer.Mapping
     {
         public ModelToResourceProfile()
         {
-            CreateMap<Orders, OrdersResources>();
+            CreateMap<OrderDetails, OrderDetailResources>();
+
+            CreateMap<Orders, OrdersResources>()
+                .ForMember(or => or.CustomerName, opt => opt.MapFrom(order => order.Customer == null ? "" : order.Customer.CompanyName))
+                .ForMember(or => or.EmployeeName, opt => opt.MapFrom(order => order.Employee == null ? "" : order.Employee.FirstName + " " + order.Employee.LastName))
+                ;
         }
     }
 }

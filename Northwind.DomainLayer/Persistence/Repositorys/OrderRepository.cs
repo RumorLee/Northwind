@@ -25,6 +25,9 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
         {
             return await _context.Orders
                 .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .Include(o => o.Customer)
+                .Include(o => o.Employee)
                 .FirstOrDefaultAsync(o => o.OrderId == orderID);
         }
 
