@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>bb738293-fd00-4442-9333-9430dbe17b63</UserSecretsId>
     <AssemblyName>Northwind</AssemblyName>
-    <RootNamespace>Northwind</RootNamespace>
+    <RootNamespace>Northwind.ServicesLayer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,12 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Northwind.DataLayer\Northwind.DataLayer.csproj" />
+    <ProjectReference Include="..\Northwind.DomainLayer\Northwind.DomainLayer.csproj" />
   </ItemGroup>
 
 

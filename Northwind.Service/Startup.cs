@@ -11,6 +11,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Northwind.DomainLayer.Persistence.Contexts;
+using Northwind.DomainLayer.Repositorys;
+using Northwind.DomainLayer.Persistence.Repositorys;
+using Northwind.DomainLayer.Services;
+using Northwind.ServicesLayer.Services;
+using Northwind.DataLayer.Mapping;
 
 namespace Northwind
 {
@@ -27,12 +33,19 @@ namespace Northwind
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
+
+            services.AddScoped<IOrdersRepository, OrderRepository>();
+            services.AddScoped<IOrdersServices, OrdersServices>();
+
+            services.AddAutoMapper(typeof(ModelToResourceProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (true || env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

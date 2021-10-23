@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.Service", "Northwind.Service\Northwind.Service.csproj", "{F4BACD4D-CF76-4654-B099-E9AB3B7C6E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.ServiceLayer", "Northwind.Service\Northwind.ServiceLayer.csproj", "{F4BACD4D-CF76-4654-B099-E9AB3B7C6E37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DF009BE0-D275-4F74-ABDC-39011C76222D} = {DF009BE0-D275-4F74-ABDC-39011C76222D}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.DomainLayer", "Northwind.DomainLayer\Northwind.DomainLayer.csproj", "{DF009BE0-D275-4F74-ABDC-39011C76222D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.DomainLayer", "Northwind.DomainLayer\Northwind.DomainLayer.csproj", "{DF009BE0-D275-4F74-ABDC-39011C76222D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.DataLayer", "Northwind.DataLayer\Northwind.DataLayer.csproj", "{B179AAE6-79F9-4035-BCA7-C51DDBB691F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.DataLayer", "Northwind.DataLayer\Northwind.DataLayer.csproj", "{B179AAE6-79F9-4035-BCA7-C51DDBB691F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.BusinessLayer", "Northwind.BusinessLayer\Northwind.BusinessLayer.csproj", "{C1BBB976-2694-4584-8E97-6A273E600B35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Northwind.BusinessLayer", "Northwind.BusinessLayer\Northwind.BusinessLayer.csproj", "{C1BBB976-2694-4584-8E97-6A273E600B35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
