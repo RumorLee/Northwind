@@ -36,6 +36,7 @@ namespace Northwind
 
             services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Northwind")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IOrdersRepository, OrderRepository>();
             services.AddScoped<IOrdersServices, OrdersServices>();
 

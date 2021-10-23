@@ -47,19 +47,18 @@ namespace Northwind.ServicesLayer.Controller
             return resources;
         }
 
-        //// GET: api/Orders/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Orders>> GetOrders(int id)
-        //{
-        //    var orders = await _context.Orders.FindAsync(id);
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] AddOrdersResources resource)
+        {
+            var orders = _mapper.Map<AddOrdersResources, Orders>(resource);
+            var result = await _ordersServices.AddAsync(orders);
 
-        //    if (orders == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //    return orders;
-        //}
+            var resources = _mapper.Map<Orders, OrdersResources>(result.Data);
+            return Ok(resources);
+        }
 
         //// PUT: api/Orders/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for

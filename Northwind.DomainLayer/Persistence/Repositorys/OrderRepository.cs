@@ -16,6 +16,11 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
         {
         }
 
+        public async Task<IEnumerable<Orders>> ListAsync()
+        {
+            return await _context.Orders.ToListAsync();
+        }
+
         public async Task<Orders> FindAsync(int orderID)
         {
             return await _context.Orders
@@ -23,9 +28,11 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
                 .FirstOrDefaultAsync(o => o.OrderId == orderID);
         }
 
-        public async Task<IEnumerable<Orders>> ListAsync()
+        public async Task AddAsync(Orders orders)
         {
-            return await _context.Orders.ToListAsync();
+            await _context.Orders.AddAsync(orders);
         }
+
+
     }
 }

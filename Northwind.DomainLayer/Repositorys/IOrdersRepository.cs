@@ -10,5 +10,6 @@ namespace Northwind.DomainLayer.Repositorys
     {
         Task<IEnumerable<Orders>> ListAsync();
         Task<Orders> FindAsync(int orderID);
+        Task AddAsync(Orders orders);
     }
 }
