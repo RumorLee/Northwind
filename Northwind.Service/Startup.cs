@@ -15,8 +15,8 @@ using Northwind.DomainLayer.Persistence.Contexts;
 using Northwind.DomainLayer.Repositorys;
 using Northwind.DomainLayer.Persistence.Repositorys;
 using Northwind.DomainLayer.Services;
+using Northwind.DomainLayer.Mapping;
 using Northwind.ServicesLayer.Services;
-using Northwind.DataLayer.Mapping;
 
 namespace Northwind
 {

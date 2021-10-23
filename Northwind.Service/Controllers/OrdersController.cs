@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Northwind.DataLayer.Resources;
+using Northwind.DomainLayer.Resources;
 using Northwind.DomainLayer.Models;
 using Northwind.DomainLayer.Services;
 

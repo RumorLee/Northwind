@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Northwind.DataLayer.Resources
+namespace Northwind.DomainLayer.Resources
 {
     public class OrdersResources
     {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Northwind.DataLayer.Resources;
+using Northwind.DomainLayer.Resources;
 using Northwind.DomainLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Northwind.DataLayer.Mapping
+namespace Northwind.DomainLayer.Mapping
 {
     public class ModelToResourceProfile : Profile
     {
