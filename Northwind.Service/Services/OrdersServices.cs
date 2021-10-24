@@ -47,11 +47,11 @@ namespace Northwind.ServicesLayer.Services
             }
         }
 
-        public async Task<Response<Orders>> UpdateAsync(int id, Orders orders)
+        public async Task<Response<Orders>> UpdateAsync(int orderID, Orders orders)
         {
             try
             {
-                var existingOrders = await _ordersRepository.FindByIdAsync(id);
+                var existingOrders = await _ordersRepository.FindByIdAsync(orderID);
 
                 if (existingOrders == null)
                     return new Response<Orders>("Orders not found.");
@@ -88,5 +88,25 @@ namespace Northwind.ServicesLayer.Services
             }
         }
 
+        public async Task<Response<Orders>> DeleteAsync(int orderID)
+        {
+            var existingCategory = await _ordersRepository.FindByIdAsync(orderID);
+
+            if (existingCategory == null)
+                return new Response<Orders>("Orders not found.");
+
+            try
+            {
+                _ordersRepository.Remove(existingCategory);
+                await _unitOfWork.CompleteAsync();
+
+                return new Response<Orders>(existingCategory);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new Response<Orders>($"An error occurred when deleting the orders: {ex.Message}");
+            }
+        }
     }
 }

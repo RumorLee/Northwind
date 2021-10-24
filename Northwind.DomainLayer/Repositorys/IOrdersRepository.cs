@@ -12,5 +12,6 @@ namespace Northwind.DomainLayer.Repositorys
         Task<Orders> FindByIdAsync(int orderID);
         Task AddAsync(Orders orders);
         void Update(Orders orders);
+        void Remove(Orders orders);
     }
 }

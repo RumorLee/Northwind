@@ -12,6 +12,7 @@ namespace Northwind.DomainLayer.Services
         Task<IEnumerable<Orders>> ListAsync();
         Task<Orders> FindByIdAsync(int orderID);
         Task<Response<Orders>> AddAsync(Orders orders);
-        Task<Response<Orders>> UpdateAsync(int id, Orders orders);
+        Task<Response<Orders>> UpdateAsync(int orderID, Orders orders);
+        Task<Response<Orders>> DeleteAsync(int orderID);
     }
 }

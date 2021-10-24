@@ -73,20 +73,16 @@ namespace Northwind.ServicesLayer.Controller
             return Ok(resources);
         }
 
-        //// DELETE: api/Orders/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Orders>> DeleteOrders(int id)
-        //{
-        //    var orders = await _context.Orders.FindAsync(id);
-        //    if (orders == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _ordersServices.DeleteAsync(id);
 
-        //    _context.Orders.Remove(orders);
-        //    await _context.SaveChangesAsync();
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //    return orders;
-        //}
+            var resources = _mapper.Map<Orders, OrdersResources>(result.Data);
+            return Ok(resources);
+        }
     }
 }

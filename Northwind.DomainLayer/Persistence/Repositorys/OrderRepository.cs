@@ -41,5 +41,11 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
             _context.Orders.Update(orders);
         }
 
+        public void Remove(Orders orders)
+        {
+            _context.OrderDetails.RemoveRange(orders.OrderDetails);
+            _context.Orders.Remove(orders);
+
+        }
     }
 }
