@@ -10,7 +10,8 @@ namespace Northwind.DomainLayer.Services
     public interface IOrdersServices
     {
         Task<IEnumerable<Orders>> ListAsync();
-        Task<Orders> FindAsync(int orderID);
+        Task<Orders> FindByIdAsync(int orderID);
         Task<Response<Orders>> AddAsync(Orders orders);
+        Task<Response<Orders>> UpdateAsync(int id, Orders orders);
     }
 }

@@ -21,7 +21,7 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
             return await _context.Orders.ToListAsync();
         }
 
-        public async Task<Orders> FindAsync(int orderID)
+        public async Task<Orders> FindByIdAsync(int orderID)
         {
             return await _context.Orders
                 .Include(o => o.OrderDetails)
@@ -36,6 +36,10 @@ namespace Northwind.DomainLayer.Persistence.Repositorys
             await _context.Orders.AddAsync(orders);
         }
 
+        public void Update(Orders orders)
+        {
+            _context.Orders.Update(orders);
+        }
 
     }
 }

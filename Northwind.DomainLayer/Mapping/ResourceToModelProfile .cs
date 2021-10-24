@@ -11,7 +11,8 @@ namespace Northwind.DomainLayer.Mapping
     {
         public ResourceToModelProfile()
         {
-            CreateMap<AddOrdersResources, Orders>();
+            CreateMap<SaveOrdersResources, Orders>();
+            CreateMap<SaveOrderDetailResources, OrderDetails>();
         }
     }
 }

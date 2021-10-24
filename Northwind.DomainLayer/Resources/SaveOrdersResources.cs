@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Northwind.DomainLayer.Resources
 {
-    public class AddOrdersResources
+    public class SaveOrdersResources
     {
         [Required]
         [MaxLength(30)]
         public string CustomerId { get; set; }
+        [Required]
         public int? EmployeeId { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? RequiredDate { get; set; }
@@ -22,5 +23,7 @@ namespace Northwind.DomainLayer.Resources
         public string ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
+
+        public List<SaveOrderDetailResources> OrderDetails { get; set; }
     }
 }

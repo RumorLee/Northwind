@@ -41,16 +41,16 @@ namespace Northwind.ServicesLayer.Controller
         [HttpGet("{id}")]
         public async Task<OrdersResources> GetOrdersByIDAsync(int id)
         {
-            var orders = await _ordersServices.FindAsync(id);
+            var orders = await _ordersServices.FindByIdAsync(id);
             var resources = _mapper.Map<Orders, OrdersResources>(orders);
 
             return resources;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] AddOrdersResources resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveOrdersResources resource)
         {
-            var orders = _mapper.Map<AddOrdersResources, Orders>(resource);
+            var orders = _mapper.Map<SaveOrdersResources, Orders>(resource);
             var result = await _ordersServices.AddAsync(orders);
 
             if (!result.Success)
@@ -60,49 +60,18 @@ namespace Northwind.ServicesLayer.Controller
             return Ok(resources);
         }
 
-        //// PUT: api/Orders/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutOrders(int id, Orders orders)
-        //{
-        //    if (id != orders.OrderId)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveOrdersResources resource)
+        {
+            var orders = _mapper.Map<SaveOrdersResources, Orders>(resource);
+            var result = await _ordersServices.UpdateAsync(id, orders);
 
-        //    _context.Entry(orders).State = EntityState.Modified;
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!OrdersExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// POST: api/Orders
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<Orders>> PostOrders(Orders orders)
-        //{
-        //    _context.Orders.Add(orders);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetOrders", new { id = orders.OrderId }, orders);
-        //}
+            var resources = _mapper.Map<Orders, OrdersResources>(result.Data);
+            return Ok(resources);
+        }
 
         //// DELETE: api/Orders/5
         //[HttpDelete("{id}")]
@@ -118,11 +87,6 @@ namespace Northwind.ServicesLayer.Controller
         //    await _context.SaveChangesAsync();
 
         //    return orders;
-        //}
-
-        //private bool OrdersExists(int id)
-        //{
-        //    return _context.Orders.Any(e => e.OrderId == id);
         //}
     }
 }
