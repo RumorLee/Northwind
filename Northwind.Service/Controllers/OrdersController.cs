@@ -10,9 +10,11 @@ using Microsoft.Extensions.Logging;
 using Northwind.DomainLayer.Resources;
 using Northwind.DomainLayer.Models;
 using Northwind.DomainLayer.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Northwind.ServicesLayer.Controller
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
