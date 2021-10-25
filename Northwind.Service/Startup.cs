@@ -17,6 +17,9 @@ using Northwind.DomainLayer.Persistence.Repositorys;
 using Northwind.DomainLayer.Services;
 using Northwind.DomainLayer.Mapping;
 using Northwind.ServicesLayer.Services;
+using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace Northwind
 {
@@ -42,12 +45,16 @@ namespace Northwind
             services.AddScoped<IOrdersServices, OrdersServices>();
 
             services.AddAutoMapper(typeof(ModelToResourceProfile));
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (true || env.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -62,6 +69,7 @@ namespace Northwind
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

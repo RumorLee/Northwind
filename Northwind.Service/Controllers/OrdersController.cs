@@ -60,7 +60,9 @@ namespace Northwind.ServicesLayer.Controller
             return Ok(resources);
         }
 
+        /// <response code="400">Update failed</response>       
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveOrdersResources resource)
         {
             var orders = _mapper.Map<SaveOrdersResources, Orders>(resource);
