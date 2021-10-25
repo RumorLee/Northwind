@@ -20,6 +20,7 @@ using Northwind.ServicesLayer.Services;
 using System.Reflection;
 using System.IO;
 using Microsoft.OpenApi.Models;
+using Northwind.ServicesLayer.Middleware;
 
 namespace Northwind
 {
@@ -60,6 +61,8 @@ namespace Northwind
             }
 
             app.UseHttpsRedirection();
+
+            app.UseLoggingMiddleware();
 
             app.UseRouting();
 
