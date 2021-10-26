@@ -1,0 +1,237 @@
+openapi: 3.0.1
+info:
+  title: Northwind
+  version: '1.0'
+paths:
+  /Orders:
+    get:
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: Success
+          content:
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrdersResources'
+    post:
+      tags:
+        - Orders
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SaveOrdersResources'
+      responses:
+        '200':
+          description: Success
+  /Orders/{id}:
+    get:
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResources'
+    put:
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SaveOrdersResources'
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    OrderDetailResources:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        productName:
+          type: string
+          nullable: true
+        unitPrice:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+        discount:
+          type: number
+          format: float
+      additionalProperties: false
+    OrdersResources:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int32
+        customerId:
+          type: string
+          nullable: true
+        employeeId:
+          type: integer
+          format: int32
+          nullable: true
+        orderDate:
+          type: string
+          format: date-time
+          nullable: true
+        requiredDate:
+          type: string
+          format: date-time
+          nullable: true
+        shippedDate:
+          type: string
+          format: date-time
+          nullable: true
+        shipVia:
+          type: integer
+          format: int32
+          nullable: true
+        freight:
+          type: number
+          format: double
+          nullable: true
+        shipName:
+          type: string
+          nullable: true
+        shipAddress:
+          type: string
+          nullable: true
+        shipCity:
+          type: string
+          nullable: true
+        shipRegion:
+          type: string
+          nullable: true
+        shipPostalCode:
+          type: string
+          nullable: true
+        shipCountry:
+          type: string
+          nullable: true
+        customerName:
+          type: string
+          nullable: true
+        employeeName:
+          type: string
+          nullable: true
+        orderDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailResources'
+          nullable: true
+      additionalProperties: false
+    SaveOrderDetailResources:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int32
+        unitPrice:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+        discount:
+          type: number
+          format: float
+      additionalProperties: false
+    SaveOrdersResources:
+      required:
+        - customerId
+        - employeeId
+      type: object
+      properties:
+        customerId:
+          maxLength: 30
+          type: string
+        employeeId:
+          type: integer
+          format: int32
+        orderDate:
+          type: string
+          format: date-time
+          nullable: true
+        requiredDate:
+          type: string
+          format: date-time
+          nullable: true
+        shippedDate:
+          type: string
+          format: date-time
+          nullable: true
+        shipVia:
+          type: integer
+          format: int32
+          nullable: true
+        freight:
+          type: number
+          format: double
+          nullable: true
+        shipName:
+          type: string
+          nullable: true
+        shipAddress:
+          type: string
+          nullable: true
+        shipCity:
+          type: string
+          nullable: true
+        shipRegion:
+          type: string
+          nullable: true
+        shipPostalCode:
+          type: string
+          nullable: true
+        shipCountry:
+          type: string
+          nullable: true
+        orderDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaveOrderDetailResources'
+          nullable: true
+      additionalProperties: false
