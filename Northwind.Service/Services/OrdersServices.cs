@@ -7,6 +7,7 @@ using Northwind.DomainLayer.Services;
 using Northwind.DomainLayer.Repositorys;
 using Northwind.DomainLayer.Communication;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace Northwind.ServicesLayer.Services
 {
@@ -14,11 +15,13 @@ namespace Northwind.ServicesLayer.Services
     {
         private readonly IOrdersRepository _ordersRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<OrdersServices> _logger;
 
-        public OrdersServices(IOrdersRepository ordersRepository, IUnitOfWork unitOfWork)
+        public OrdersServices(IOrdersRepository ordersRepository, IUnitOfWork unitOfWork, ILogger<OrdersServices> logger)
         {
             _ordersRepository = ordersRepository;
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Orders>> ListAsync()
@@ -42,7 +45,7 @@ namespace Northwind.ServicesLayer.Services
             }
             catch (Exception ex)
             {
-                // Do some logging stuff
+                _logger.LogError($"Add orders failed:{ex.Message}");
                 return new Response<Orders>($"An error occurred when saving the orders: {ex.Message}");
             }
         }
@@ -83,28 +86,28 @@ namespace Northwind.ServicesLayer.Services
             }
             catch (Exception ex)
             {
-                // Do some logging stuff
+                _logger.LogError($"Update orders failed:{ex.Message}");
                 return new Response<Orders>($"An error occurred when updating the orders: {ex.Message}");
             }
         }
 
         public async Task<Response<Orders>> DeleteAsync(int orderID)
         {
-            var existingCategory = await _ordersRepository.FindByIdAsync(orderID);
+            var existingOrders = await _ordersRepository.FindByIdAsync(orderID);
 
-            if (existingCategory == null)
+            if (existingOrders == null)
                 return new Response<Orders>("Orders not found.");
 
             try
             {
-                _ordersRepository.Remove(existingCategory);
+                _ordersRepository.Remove(existingOrders);
                 await _unitOfWork.CompleteAsync();
 
-                return new Response<Orders>(existingCategory);
+                return new Response<Orders>(existingOrders);
             }
             catch (Exception ex)
             {
-                // Do some logging stuff
+                _logger.LogError($"Delete orders failed:{ex.Message}");
                 return new Response<Orders>($"An error occurred when deleting the orders: {ex.Message}");
             }
         }
