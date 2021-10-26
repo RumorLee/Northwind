@@ -28,7 +28,7 @@ namespace Northwind.ServicesLayer.Middleware
 
             try
             {
-                log = $"{context.Request.Path}, {context.Request.Method}, {await ReadRequestBody(context)}";
+                log = $"Request:{context.Request.Method}, {context.Request.Path},  {await ReadRequestBody(context)}";
 
                 await _next.Invoke(context);
             }
@@ -40,6 +40,8 @@ namespace Northwind.ServicesLayer.Middleware
             }
             finally
             {
+                log += $", Response:{context.Response.StatusCode}";
+
                 _logger.Log(logLevel, log);
             }
         }
